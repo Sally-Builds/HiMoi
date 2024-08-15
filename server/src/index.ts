@@ -1,9 +1,10 @@
 import 'dotenv/config';
-import { app } from './app';
+import { server } from './app';
 import { DATABASE, PORT } from './helpers/constants';
 import DB from './helpers/config/DB';
 import RedisClient from './helpers/config/redis-client';
 import { REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, REDIS_USERNAME } from './helpers/constants';
+import { Server } from 'socket.io'
 
 const db = new DB(console);
 export const redis_client = new RedisClient(
@@ -16,7 +17,8 @@ export const redis_client = new RedisClient(
 //start application
 redis_client.connect()
 db.connect(DATABASE);
-app.listen(PORT, () => {
+
+server.listen(PORT, () => {
     console.log("Server is running on port: " + PORT)
 })
 // connect to database

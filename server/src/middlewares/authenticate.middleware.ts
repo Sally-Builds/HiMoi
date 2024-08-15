@@ -26,12 +26,7 @@ export async function authenticate(
       return next(new CustomError({ message: 'access token invalid', code: 401, ctx: { data: 'invalid bearer token' } }))
     }
 
-    const refreshPayload = await verifyToken(req.cookies.refresh_token)
-
-
-    if (refreshPayload instanceof jwt.JsonWebTokenError) return next(new CustomError({ message: 'refresh token expired.', code: 401, ctx: { data: 'refresh token expired.' } }))
-
-    const user = await UserModel.findOne({ _id: refreshPayload.id }, { __v: 0, password: 0 })
+    const user = await UserModel.findOne({ _id: accessPayload.id }, { __v: 0, password: 0 })
 
     if (!user) {
       return next(new CustomError({ message: 'access token invalid.', code: 401, ctx: { data: 'invalid bearer token' } }))
