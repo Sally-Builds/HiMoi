@@ -49,6 +49,7 @@ export const verifyController = async (req: Request, res: Response) => {
 }
 
 export const getUserController = async (req: Request, res: Response) => {
+    req.io.emit("from", "done")
     res.status(200).json({ user: req.user })
 }
 
