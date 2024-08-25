@@ -7,15 +7,16 @@ export enum Gender {
 
 export interface IUser {
     email: string;
+    password: string;
     id: string;
-    name: string;
+    full_name: string;
     nick_name: string;
     dob: Date;
     gender: Gender;
     interests: string[];
     location: string;
-    age: number;
-    height: number;
+    height: string;
+    is_verified: boolean;
 }
 
 
@@ -24,7 +25,11 @@ const userSchema = new Schema<IUser>({
         type: String,
         required: [true, 'email is required']
     },
-    name: String,
+    password: {
+        type: String,
+        required: [true, 'password is required']
+    },
+    full_name: String,
     nick_name: String,
     dob: Date,
     gender: {
@@ -32,8 +37,11 @@ const userSchema = new Schema<IUser>({
         enum: Object.values(Gender)
     },
     interests: [String],
-    age: Number,
-    height: Number,
+    height: String,
+    is_verified: {
+        type: Boolean,
+        default: false,
+    }
 })
 
 export const UserModel = model("User", userSchema)

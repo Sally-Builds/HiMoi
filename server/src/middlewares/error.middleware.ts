@@ -13,7 +13,7 @@ export const errorHandler = (
   if (err instanceof CustomError) {
     const { statusCode, message, logging, error } = err;
     if (NODE_ENV == 'development') {
-      console.log(error)
+      // console.log(error)
       // logger.error(
       //   JSON.stringify({
       //     code: statusCode,
@@ -21,8 +21,8 @@ export const errorHandler = (
       //     stack: err.stack,
       //   }),
       // );
-    }else {
-      console.log(error.ctx)
+    } else {
+      // console.log(error.ctx)
       // logger.error('', { data: error.ctx})
     }
     return res.status(statusCode).json({

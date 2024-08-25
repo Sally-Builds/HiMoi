@@ -32,23 +32,9 @@ export async function authenticate(
       return next(new CustomError({ message: 'access token invalid.', code: 401, ctx: { data: 'invalid bearer token' } }))
     }
 
-    req.user = user.toObject({
-      transform: (doc, ret) => {
-        delete ret.password;
-      }
-    })
+    req.user = user;
     next()
   } catch (e) {
     next(new CustomError({ message: 'access token invalid', code: 401, ctx: { data: 'invalid bearer token' } }))
-  }
-}
-
-export function restrictTo(...roles: [UserRole]) {
-  return (req: Request, res: Response, next: NextFunction) => {
-    if (!req.user) throw new CustomError({ message: 'Forbidden', code: 403 })
-
-    if (!roles.includes(req.user.role)) throw new CustomError({ message: 'Forbidden', code: 403 })
-
-    next()
   }
 }
