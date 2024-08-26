@@ -14,7 +14,8 @@ export default class RedisClient {
     this.port = port;
     this.password = password;
     this.username = username
-    this.redisClient = createClient({ url: `rediss://${this.username}:${this.password}@${this.host}:${this.port}` });
+    this.redisClient = createClient({ url: `redis://127.0.0.1:6379` });
+    // this.redisClient = createClient({ url: `rediss://${this.username}:${this.password}@${this.host}:${this.port}` });
   }
 
   public async connect() {

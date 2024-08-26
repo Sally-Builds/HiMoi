@@ -4,7 +4,6 @@ import { DATABASE, PORT } from './helpers/constants';
 import DB from './helpers/config/DB';
 import RedisClient from './helpers/config/redis-client';
 import { REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, REDIS_USERNAME } from './helpers/constants';
-import { Server } from 'socket.io'
 
 const db = new DB(console);
 export const redis_client = new RedisClient(

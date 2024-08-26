@@ -4,6 +4,7 @@ import { UserModel } from '../models';
 import { Token, verifyToken } from '../helpers/lib/App';
 import jwt from 'jsonwebtoken';
 import { UserRole } from '../helpers/constants';
+import { io } from '../app';
 
 export async function authenticate(
   req: Request,

@@ -100,12 +100,17 @@ export const getMeController = async (req: Request, res: Response) => {
 }
 
 export const getUserController = async (req: Request, res: Response) => {
-    // req.io.emit("from", "done")
     const user = await UserModel.findById(req.params.id)
 
     if (!user) throw new CustomError({ message: "User not found", code: 404 })
 
     res.status(200).json({ user })
+}
+
+export const getUsersController = async (req: Request, res: Response) => {
+    const users = await UserModel.find({ _id: { $ne: req.user.id }, is_verified: true }).select('-password -__v -is_verified')
+
+    res.status(200).json({ users })
 }
 
 export const updateProfileController = async (req: Request, res: Response) => {
